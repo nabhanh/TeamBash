@@ -61,8 +61,9 @@
     </body>
 
     <script>
-        //setData("Test", "Farmie", "1290");
-        setHighBid("120");
+        getData();
+        getBid();
+
         function setData(name, farmerName, qtyLeft){
             document.getElementById("name").innerHTML = name;
             document.getElementById("farmerName").innerHTML = "From " + farmerName;
@@ -71,10 +72,11 @@
         }
 
         function setHighBid(bid){
+            if(bid!=0)
             document.getElementById("highBid").innerHTML = "Rs " + bid + " Per Kg";
+            else
+            document.getElementById("highBid").innerHTML = "No Bids";
         }
-
-        getData();
 
         function getData(){
             let params = new URLSearchParams(location.search);
@@ -101,6 +103,24 @@
                 var counter = jsonData[i];  
                 setData(counter.pname, counter.fname,counter.quantity);
             }
+        }
+
+        function getBid(){
+            let params = new URLSearchParams(location.search);
+            jsonData={
+                id:params.get('id')
+            };
+            $.ajax({
+                type: "GET",
+                data: jsonData,
+                url: "../../BackEnd/misc/getMaxBid.php",
+                success: function(data) {
+                    setHighBid(data);
+                    },
+                    error: function(data) {
+                        console.log("ERROR");
+                        }
+                        });
         }
 
     </script>
