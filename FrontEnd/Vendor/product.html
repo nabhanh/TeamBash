@@ -1,5 +1,6 @@
 <html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <head>
         <title>Product</title>
 
@@ -21,49 +22,106 @@
             }
 
             .bidBox{
-                background: #0077FF;
-                border-radius: 8px;
+                border: 1px solid black;
+                border-radius: 8px 0 0 8px;
+                height: 39px;
+                width: 50%;
                 padding: 10px;
-                display: inline-block;
-                width: 80px;
-                height: 80px;
-                margin-right: 5px;
+                outline: none;
+                color: #000000;
+                font-family: HelveticaNeue-Medium;
+            }
+
+            #submit{
+                height: 40px;
+                width: 40px;
+                border: none;
+                border-radius: 0 8px 8px 0;
+                background-color:#31C600;
+                color: white;
+                font-weight: 900;
             }
 
         </style>
     </head>
 
     <body>
-        <p class="heading" style="font-size: 36px;">Rice</p>
-        <p class="heading" style="font-size: 16px;font-family: HelveticaNeue;color: #A2A2A2;margin-bottom: 5px;">From Gopal</p>
-        <p class="heading" style="font-size: 26px;font-family: HelveticaNeue-Medium;">100 Kg Left</p><br><br>
+        <p class="heading" style="font-size: 36px;color: rgb(255, 153, 0);" id="name"></p>
+        <p class="heading" style="font-size: 16px;font-family: HelveticaNeue;color: #A2A2A2;margin-bottom: 5px;" id="farmerName"></p>
+        <p class="heading" style="font-size: 24px;font-family: HelveticaNeue-Medium;" id="qtyLeft"></p><br><br>
 
         <p class="heading" style="font-size: 30px;color: #31C600;margin-bottom: 10px;">Highest Bid</p>
-        <p class="heading" style="font-size: 26px;font-family: HelveticaNeue-Medium;">Rs 100 Per Kg</p><br><br>
+        <p class="heading" style="font-size: 24px;font-family: HelveticaNeue-Medium;" id="highBid"></p><br><br>
 
-        <p class="heading" style="font-size: 30px;margin-bottom: 10px;">Current Bids</p>
-
-        <div id="bidsDiv">
-
-            <center>
-            <div class="bidBox">
-                <p class="heading" style="color: white;margin-bottom: 10px;margin-top: 15px;font-size: 20px;">100 Kg</p>
-                <p class="heading" style="color: white;font-size: 14;font-family: HelveticaNeue;">Rs 100 /Kg</p>
-            </div>
-
-            <div class="bidBox">
-                <p class="heading" style="color: white;margin-bottom: 10px;margin-top: 15px;font-size: 20px;">100 Kg</p>
-                <p class="heading" style="color: white;font-size: 14;font-family: HelveticaNeue;">Rs 100 /Kg</p>
-            </div>
-
-            <div class="bidBox">
-                <p class="heading" style="color: white;margin-bottom: 10px;margin-top: 15px;font-size: 20px;">100 Kg</p>
-                <p class="heading" style="color: white;font-size: 14;font-family: HelveticaNeue;">Rs 100 /Kg</p>
-            </div>
-
-        </center>
-
-        </div>
+        <p class="heading" style="font-size: 30px;color: #0077FF;">Your Bid</p>
+        <p class="heading" style="font-size: 16px;font-family: HelveticaNeue;color: #A2A2A2;margin-bottom: 15px;">Per Kg</p>
+        <input type="number" class="bidBox" placeholder="Enter Your Bid Here" min="0" inputmode="decimal"/>
+        <button id="submit">&#10003;</button>
 
     </body>
+
+    <script>
+        getData();
+        getBid();
+
+        function setData(name, farmerName, qtyLeft){
+            document.getElementById("name").innerHTML = name;
+            document.getElementById("farmerName").innerHTML = "From " + farmerName;
+            document.getElementById("qtyLeft").innerHTML = qtyLeft +" Kg Left";
+            //document.getElementById("highBid").innerHTML = "Rs " + highBid + " Per Kg";
+        }
+
+        function setHighBid(bid){
+            if(bid!=0)
+            document.getElementById("highBid").innerHTML = "Rs " + bid + " Per Kg";
+            else
+            document.getElementById("highBid").innerHTML = "No Bids";
+        }
+
+        function getData(){
+            let params = new URLSearchParams(location.search);
+            jsonData={
+                id:params.get('id')
+            };
+            $.ajax({
+                type: "GET",
+                data: jsonData,
+                url: "../../BackEnd/product/getid.php",
+                success: function(data) {
+                    console.log(data);
+                    parseData(data);
+                    },
+                    error: function(data) {
+                        console.log("ERROR");
+                        }
+                        });
+        }
+
+        function parseData(jsonD) {
+            var jsonData = JSON.parse(jsonD);
+            for (var i = 0; i < jsonData.length; i++) {
+                var counter = jsonData[i];  
+                setData(counter.pname, counter.fname,counter.quantity);
+            }
+        }
+
+        function getBid(){
+            let params = new URLSearchParams(location.search);
+            jsonData={
+                id:params.get('id')
+            };
+            $.ajax({
+                type: "GET",
+                data: jsonData,
+                url: "../../BackEnd/misc/getMaxBid.php",
+                success: function(data) {
+                    setHighBid(data);
+                    },
+                    error: function(data) {
+                        console.log("ERROR");
+                        }
+                        });
+        }
+
+    </script>
 </html>
