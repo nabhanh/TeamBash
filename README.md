@@ -1,7 +1,7 @@
 # TeamBash
-Problem Statement Title: Portal for Farmers to sell the produce at a better rate
-PS Number : RA27
-Team Members :
+Problem Statement Title: Portal for Farmers to sell the produce at a better rate <br/>
+PS Number : RA27<br/>
+Team Members :<br/>
 1) Ciddarth Raaj - RA1811003040105
 2) Nabhan Hanif - RA1811003040036 - LEADER
 3) Trina Panda - RA1811003040005
