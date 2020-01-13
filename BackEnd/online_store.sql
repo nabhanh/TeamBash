@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2020 at 12:42 PM
+-- Generation Time: Jan 13, 2020 at 10:56 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -47,9 +47,16 @@ CREATE TABLE `farmer` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `location` text NOT NULL,
-  `phone` int(10) NOT NULL,
+  `phone` int(100) NOT NULL,
   `password` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `farmer`
+--
+
+INSERT INTO `farmer` (`id`, `name`, `location`, `phone`, `password`) VALUES
+(1, 'Alex Farmers', 'Chennai', 954413255, 'password123');
 
 -- --------------------------------------------------------
 
@@ -76,8 +83,20 @@ CREATE TABLE `product` (
   `quantity` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   `fid` int(11) NOT NULL,
-  `id` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`name`, `quantity`, `price`, `fid`, `id`, `status`) VALUES
+('Rice', 1000, 150, 1, 1, 0),
+('Wheat', 500, 200, 1, 2, 0),
+('Egg', 3000, 150, 1, 3, 0),
+('Milk', 1500, 100, 1, 4, 0),
+('Meat', 2500, 300, 1, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -91,6 +110,13 @@ CREATE TABLE `vendor` (
   `phone` int(10) NOT NULL,
   `password` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `vendor`
+--
+
+INSERT INTO `vendor` (`id`, `name`, `phone`, `password`) VALUES
+(1, 'John', 964653121, 'password321');
 
 --
 -- Indexes for dumped tables
@@ -134,13 +160,13 @@ ALTER TABLE `vendor`
 -- AUTO_INCREMENT for table `bidding`
 --
 ALTER TABLE `bidding`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `farmer`
 --
 ALTER TABLE `farmer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -152,13 +178,13 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
