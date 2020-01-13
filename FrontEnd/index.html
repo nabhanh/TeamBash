@@ -6,7 +6,7 @@
         <style>
             body{
                 font-family: HelveticaNeue;
-                margin: 20px;
+                margin: 0;
             }
 
             p{
@@ -57,11 +57,24 @@
                 display: flex;
                 align-items: stretch;
             }
+
+            #main{
+                margin: 20px
+            }
+
+            #footer{
+                bottom: 0;
+                position: fixed;
+                width: 100%;
+                background-color: #00AA05;
+                height: 60px;
+            }
         </style>
     </head>
 
     <body>
-        <p class="heading" style="font-size: 36px;">Home</p>
+        <div id="main">
+            <p class="heading" style="font-size: 36px;">Home</p>
         <p class="heading" style="font-size: 21px;margin-top: 15px;margin-bottom: 10px;">Lab Status</p>
         
         <div id="labStat">
@@ -145,6 +158,11 @@
                 
             </div>
         </center>
+
+        </div>
+        </div>
+
+        <div id="footer">
 
         </div>
     </body>
