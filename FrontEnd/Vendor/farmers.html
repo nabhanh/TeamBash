@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <title>Farmers</title>
+
+        <style>
+            body{
+                font-family: HelveticaNeue;
+                margin: 20px;
+            }
+
+            p{
+                margin: 0;
+                padding: 0;
+            }
+
+            .heading{                
+                font-family: HelveticaNeue-Bold;
+                color: #000000;
+                text-align: left;
+            }
+
+            .productBox{
+            background: #0080FF;
+            border-radius: 10px;
+            display: inline-block;
+            padding: 10px;
+            margin:5px;
+            width: 76px;
+            font-size: 16px;
+            padding-bottom: 5px;
+            cursor: pointer;
+        }
+        .productBox p{
+            margin-bottom: 5px;
+        }
+        </style>
+    </head>
+
+    <body>
+
+        <p class="heading" style="font-size: 36px;margin-bottom: 5px;">Farmers</p>
+        <p class="heading" style="font-size: 28px;color: #31C600;margin-bottom: 15px;" id="name"></p>
+
+        <center>
+        <div id="products">
+
+        </div>
+    </center>
+
+        <script>
+            setName(new URLSearchParams(location.search).get('name'));
+            getProducts();
+
+            function getProducts(){
+                let params = new URLSearchParams(location.search);
+                jsonData={
+                    fid:params.get('id')
+                    };
+                $.ajax({
+                    type: "GET",
+                    data: jsonData,
+                    url: "../../BackEnd/product/getProductFarmer.php",
+                    success: function(data) {
+                        parseData(data);
+                    },
+                    error: function(data) {
+                        console.log("ERROR");
+                        }
+                    });
+            }
+
+            function parseData(jsonD){
+                var jsonData = JSON.parse(jsonD);
+                for (var i = 0; i < jsonData.length; i++) {
+                    var counter = jsonData[i];  
+                    addProduct(counter.name, counter.quantity, counter.price, counter.id);
+                }
+            }
+
+            function setName(name){
+                document.getElementById("name").innerHTML = name;
+            }
+
+            function addProduct(name,qty,price,id){
+                outerDiv=document.createElement("div");
+                outerDiv.className="productBox";
+                outerDiv.style.color="white";
+
+                outerDiv.onclick = function(){
+                    window.open("product.html?id="+id,"_self");
+                }
+                
+                nameText=document.createElement("p");
+                nameText.className="heading";
+                nameText.innerHTML=name;
+                nameText.style.color="white";
+
+                qtyText=document.createElement("p");
+                qtyText.className="heading";
+                qtyText.style.color="white";
+                qtyText.innerHTML=qty+" Kg";
+
+                priceText=document.createElement("p");
+                priceText.className="heading";
+                priceText.innerHTML="Rs "+price+"/Kg";
+                priceText.style.color="white";
+                priceText.style.fontFamily="HelveticaNeue";
+
+                outerDiv.appendChild(nameText);
+                outerDiv.appendChild(qtyText);
+                outerDiv.appendChild(priceText);
+
+                document.getElementById("products").append(outerDiv);
+                }
+        </script>
+
+    </body>
+</html>
