@@ -3,7 +3,7 @@ include '../login.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$query = 'select * from bidding where vid='.$_GET['vid'].' AND pid = '.$_GET['pid'];
+$query = 'SELECT * FROM product WHERE name LIKE "%'.$_GET['str'].'%"';
 $results = mysqli_query($db, $query);
 
 $response = [];
@@ -13,4 +13,3 @@ while ($row = $results->fetch_assoc()) {
 }
 
 echo json_encode($response);
-
