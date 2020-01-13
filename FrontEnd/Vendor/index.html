@@ -71,36 +71,6 @@
 
             <center>
             <div id="products">
-                <div class="productBox">
-                    <p class="heading" style="color: white;margin-bottom: 5px;">Rice</p>
-                    <p class="heading" style="color: white;margin-bottom: 5px;">100 Kg</p>
-                    <p class="heading" style="color: white; font-family: HelveticaNeue;">Rs 120/Kg</p>
-                </div>
-                <div class="productBox">
-                    <p class="heading" style="color: white;margin-bottom: 5px;">Rice</p>
-                    <p class="heading" style="color: white;margin-bottom: 5px;">100 Kg</p>
-                    <p class="heading" style="color: white; font-family: HelveticaNeue;">Rs 120/Kg</p>
-                </div>
-                <div class="productBox">
-                    <p class="heading" style="color: white;margin-bottom: 5px;">Rice</p>
-                    <p class="heading" style="color: white;margin-bottom: 5px;">100 Kg</p>
-                    <p class="heading" style="color: white; font-family: HelveticaNeue;">Rs 120/Kg</p>
-                </div>
-                <div class="productBox">
-                    <p class="heading" style="color: white;margin-bottom: 5px;">Rice</p>
-                    <p class="heading" style="color: white;margin-bottom: 5px;">100 Kg</p>
-                    <p class="heading" style="color: white; font-family: HelveticaNeue;">Rs 120/Kg</p>
-                </div>
-                <div class="productBox">
-                    <p class="heading" style="color: white;margin-bottom: 5px;">Rice</p>
-                    <p class="heading" style="color: white;margin-bottom: 5px;">100 Kg</p>
-                    <p class="heading" style="color: white; font-family: HelveticaNeue;">Rs 120/Kg</p>
-                </div>
-                <div class="productBox">
-                    <p class="heading" style="color: white;margin-bottom: 5px;">Rice</p>
-                    <p class="heading" style="color: white;margin-bottom: 5px;">100 Kg</p>
-                    <p class="heading" style="color: white; font-family: HelveticaNeue;">Rs 120/Kg</p>
-                </div>
             </div>
         </center>
 
@@ -110,15 +80,6 @@
 
             <center>
             <div id="farmers">
-                <div class="farmerBox">
-                    <p class="heading" style="color: white;margin-bottom: 5px;"">Test</p>
-                </div>
-                <div class="farmerBox">
-                    <p class="heading" style="color: white;margin-bottom: 5px;"">Test</p>
-                </div>
-                <div class="farmerBox">
-                    <p class="heading" style="color: white;margin-bottom: 5px;"">Test</p>
-                </div>
             </div>
         </center>
 
@@ -126,9 +87,8 @@
     
 </body>
 <script>
-    addProduct("Rice",5,100);
-    addProduct("Wheat",1000,120);
-    addFarmer("AKP");
+    getProducts();
+    getFarmers();
     function addProduct(name,qty,price){
         outerDiv=document.createElement("div");
         outerDiv.className="productBox";
@@ -183,18 +143,51 @@
             $.ajax({
                 type: "POST",
                 data: jsonData,
-                url: "BackEnd/product/get_data.php",
+                url: "../../BackEnd/product/get_data.php",
                 success: function(data) {
-                    if (data == "0")
-                        document.getElementById("buy").innerHTML = "ALREADY IN CART!";
-                    else
-                        document.getElementById("buy").innerHTML = data;
-                },
+                    parseData(data);
+                    },
                 error: function(data) {
-                    // if it does not work do whatever you want.
                     console.log("ERROR");
                 }
             });
+        }
+        function parseData(jsonD) {
+            var jsonData = JSON.parse(jsonD);
+            for (var i = 0; i < jsonData.length; i++) {
+                var counter = jsonData[i];  
+                addProduct(counter.name,counter.quantity,counter.price);
+            }
+        }
+        function getFarmers() {
+            // jsonData = {
+            //     productName: nameV,
+            //     qty: qtyV,
+            //     colour: colourV,
+            //     pid: pidV,
+            //     uid: uidV
+            // };
+                jsonData={
+
+                };
+            $.ajax({
+                type: "POST",
+                data: jsonData,
+                url: "../../BackEnd/farmer/get_data.php",
+                success: function(data) {
+                    parseDataFarmers(data);
+                    },
+                error: function(data) {
+                    console.log("ERROR");
+                }
+            });
+        }
+        function parseDataFarmers(jsonD) {
+            var jsonData = JSON.parse(jsonD);
+            for (var i = 0; i < jsonData.length; i++) {
+                var counter = jsonData[i];  
+                addFarmer(counter.name);
+            }
         }
 </script>
 </html>
