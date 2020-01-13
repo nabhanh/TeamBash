@@ -35,6 +35,7 @@
             width: 76px;
             font-size: 16px;
             padding-bottom: 5px;
+            cursor: pointer;
         }
         .productBox p{
             margin-bottom: 5px;
@@ -89,14 +90,14 @@
 <script>
     getProducts();
     getFarmers();
-    addProduct("Rice",100,120);
-    addProduct("Wheat",200,18);
-    addFarmer("Name1");
-    addFarmer("Name2");
-    function addProduct(name,qty,price){
+    function addProduct(name,qty,price,id){
         outerDiv=document.createElement("div");
         outerDiv.className="productBox";
         outerDiv.style.color="white";
+
+        outerDiv.onclick = function(){
+            window.open("product.html?id="+id,"_self");
+        }
         
         nameText=document.createElement("p");
         nameText.className="heading";
@@ -160,7 +161,7 @@
             var jsonData = JSON.parse(jsonD);
             for (var i = 0; i < jsonData.length; i++) {
                 var counter = jsonData[i];  
-                addProduct(counter.name,counter.quantity,counter.price);
+                addProduct(counter.name,counter.quantity,counter.price, counter.id);
             }
         }
         function getFarmers() {

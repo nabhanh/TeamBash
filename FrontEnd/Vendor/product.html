@@ -61,7 +61,7 @@
     </body>
 
     <script>
-        setData("Test", "Farmie", "1290");
+        //setData("Test", "Farmie", "1290");
         setHighBid("120");
         function setData(name, farmerName, qtyLeft){
             document.getElementById("name").innerHTML = name;
@@ -86,6 +86,7 @@
                 data: jsonData,
                 url: "../../BackEnd/product/getid.php",
                 success: function(data) {
+                    console.log(data);
                     parseData(data);
                     },
                     error: function(data) {

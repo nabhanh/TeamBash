@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 $host = 'localhost';
 $user = 'root';
 //$password = 'Ciddharth2_';
-$password = '';
+$password = 'root';
 $port = 8889;
 $database = 'online_store';
 
