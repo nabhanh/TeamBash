@@ -3,7 +3,7 @@ include '../login.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$query = 'select * from bidding where id='.$_GET['id'];
+$query = 'select * from bidding where vid='.$_GET['vid'].' AND pid = '.$_GET['pid'];
 $results = mysqli_query($db, $query);
 
 $response = [];
