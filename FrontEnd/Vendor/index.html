@@ -24,6 +24,37 @@
             height: 20px;
             border: none;
         }
+        .productBox{
+            background: #0080FF;
+            border-radius: 10px;
+            display: inline-block;
+            padding: 10px;
+            margin:5px;
+            width: 76px;
+            font-size: 16px;
+            padding-bottom: 5px;
+        }
+        .productBox p{
+            margin-bottom: 5px;
+        }
+
+        p{
+            padding: 0;
+            margin: 0;
+        }
+        .farmerBox{
+            background: #30AE1E;
+            border-radius: 8px;
+            display: inline-block;
+            padding: 10px;
+            margin:5px;
+            width: 70px;
+            font-size: 16px;
+        }
+        .farmerBox p{
+            text-align: center;
+            color:white;
+        }
     
     </style>
 </head>
@@ -36,11 +67,90 @@
 
             <center>
             <div id="products">
+                <div class="productBox">
+                    <p class="heading" style="color: white;margin-bottom: 5px;">Rice</p>
+                    <p class="heading" style="color: white;margin-bottom: 5px;">100 Kg</p>
+                    <p class="heading" style="color: white; font-family: HelveticaNeue;">Rs 120/Kg</p>
+                </div>
+                <div class="productBox">
+                    <p class="heading" style="color: white;margin-bottom: 5px;">Rice</p>
+                    <p class="heading" style="color: white;margin-bottom: 5px;">100 Kg</p>
+                    <p class="heading" style="color: white; font-family: HelveticaNeue;">Rs 120/Kg</p>
+                </div>
+                <div class="productBox">
+                    <p class="heading" style="color: white;margin-bottom: 5px;">Rice</p>
+                    <p class="heading" style="color: white;margin-bottom: 5px;">100 Kg</p>
+                    <p class="heading" style="color: white; font-family: HelveticaNeue;">Rs 120/Kg</p>
+                </div>
+                <div class="productBox">
+                    <p class="heading" style="color: white;margin-bottom: 5px;">Rice</p>
+                    <p class="heading" style="color: white;margin-bottom: 5px;">100 Kg</p>
+                    <p class="heading" style="color: white; font-family: HelveticaNeue;">Rs 120/Kg</p>
+                </div>
+                <div class="productBox">
+                    <p class="heading" style="color: white;margin-bottom: 5px;">Rice</p>
+                    <p class="heading" style="color: white;margin-bottom: 5px;">100 Kg</p>
+                    <p class="heading" style="color: white; font-family: HelveticaNeue;">Rs 120/Kg</p>
+                </div>
+                <div class="productBox">
+                    <p class="heading" style="color: white;margin-bottom: 5px;">Rice</p>
+                    <p class="heading" style="color: white;margin-bottom: 5px;">100 Kg</p>
+                    <p class="heading" style="color: white; font-family: HelveticaNeue;">Rs 120/Kg</p>
+                </div>
             </div>
         </center>
 
         </div>
+        <div>
+            <p class="heading" style="font-size: 24px;margin-top: 15px;margin-bottom: 10px;">Farmers</p>
+
+            <center>
+            <div id="farmers">
+                <div class="farmerBox">
+                    <p class="heading" style="color: white;margin-bottom: 5px;"">Test</p>
+                </div>
+                <div class="farmerBox">
+                    <p class="heading" style="color: white;margin-bottom: 5px;"">Test</p>
+                </div>
+                <div class="farmerBox">
+                    <p class="heading" style="color: white;margin-bottom: 5px;"">Test</p>
+                </div>
+            </div>
+        </center>
+
     </div>
     
 </body>
+<script>
+    addProduct("Rice",5,100);
+    addProduct("Wheat",1000,120);
+    function addProduct(name,qty,price){
+        outerDiv=document.createElement("div");
+        outerDiv.className="productBox";
+        outerDiv.style.color="white";
+        
+        nameText=document.createElement("p");
+        nameText.className="heading";
+        nameText.innerHTML=name;
+        nameText.style.color="white";
+
+        qtyText=document.createElement("p");
+        qtyText.className="heading";
+        qtyText.style.color="white";
+        qtyText.innerHTML=qty+" Kg";
+
+        priceText=document.createElement("p");
+        priceText.className="heading";
+        priceText.innerHTML="Rs "+price+"/Kg";
+        priceText.style.color="white";
+        priceText.style.fontFamily="HelveticaNeue";
+
+        outerDiv.appendChild(nameText);
+        outerDiv.appendChild(qtyText);
+        outerDiv.appendChild(priceText);
+
+        document.getElementById("products").append(outerDiv);
+
+    }
+</script>
 </html>
