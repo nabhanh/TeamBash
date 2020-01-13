@@ -1,6 +1,7 @@
 <html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <title>Home</title>
 
         <style>
@@ -108,10 +109,7 @@
         </div>
 
         <script>
-
-            addAcceptedOrder("1", "Test", "100", "10000");
-            addAcceptedOrder("1", "Test", "100", "10000");
-            addAcceptedOrder("1", "Test", "100", "10000");
+            getAccReqs(1);
 
             addCurrentRequest("1", "Test", "100", "10000");
             addCurrentRequest("1", "Test", "100", "10000");
@@ -296,23 +294,17 @@
                 addCurrentRequest(counter.name,counter.quantity,counter.price);
             }
         }
-        function getAccReqs() {
-            // jsonData = {
-            //     productName: nameV,
-            //     qty: qtyV,
-            //     colour: colourV,
-            //     pid: pidV,
-            //     uid: uidV
-            // };
-                jsonData={
-
-                };
+        function getAccReqs(id) {
+            jsonData = {
+                fid: id
+            };
             $.ajax({
-                type: "POST",
+                type: "GET",
                 data: jsonData,
-                url: "../../BackEnd/product/get_data.php",
+                url: "../../BackEnd/misc/getAccReqs.php",
                 success: function(data) {
-                    parseData(data);
+                    console.log(data);
+                    printAcc(data);
                     },
                 error: function(data) {
                     console.log("ERROR");
@@ -323,7 +315,7 @@
             var jsonData = JSON.parse(jsonD);
             for (var i = 0; i < jsonData.length; i++) {
                 var counter = jsonData[i];  
-                addAcceptedOrder(counter.id,counter.name,counter.qty,counter.price);
+                addAcceptedOrder(counter.id,counter.name,counter.bid_qty,counter.bid_price*counter.bid_qty);
             }
         }
 
