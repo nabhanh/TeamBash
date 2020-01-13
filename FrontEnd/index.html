@@ -1,0 +1,151 @@
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <title>Home</title>
+
+        <style>
+            body{
+                font-family: HelveticaNeue;
+                margin: 20px;
+            }
+
+            p{
+                margin: 0;
+                padding: 0;
+            }
+
+            .heading{                
+                font-family: HelveticaNeue-Bold;
+                color: #000000;
+                text-align: left;
+            }
+
+            .smallText{
+                font-size: 16px;
+                display: block;
+                text-align: center;
+                font-family: HelveticaNeue;
+            }
+
+            .labStatBox{
+                background: #FFFFFF;
+                box-shadow: 0 2px 4px 0 rgba(159,159,159,0.50);
+                border-radius: 8px;
+                display: inline-block;
+                padding: 15px;
+                width: 300px;
+                margin: 4px;
+            }
+
+            .currReqBox{
+                background: #FFFFFF;
+                box-shadow: 0 2px 4px 0 rgba(159,159,159,0.50);
+                border-radius: 8px;
+                padding: 15px;
+                margin: 4px;
+                max-width: 300px;
+                min-width: 300px;
+                display: inline-block;
+                margin-bottom: 10px;
+            }
+
+            .currReqBox p{
+                display: inline-block;
+            }
+
+            .flex-box{
+                display: flex;
+                align-items: stretch;
+            }
+        </style>
+    </head>
+
+    <body>
+        <p class="heading" style="font-size: 36px;">Home</p>
+        <p class="heading" style="font-size: 21px;margin-top: 15px;margin-bottom: 10px;">Lab Status</p>
+        
+        <div id="labStat">
+            <center>
+                <div class="labStatBox" style="max-width: 70px;">
+                    <center>
+                    <div>
+                        <p class="heading" style="font-size: 16px;margin-bottom: 5px;">Rice</p>
+                        <p class="heading" style="font-size: 16px;color: #31C600;">Accepted</p>
+                    </div>
+                </center>
+                </div>
+
+                <div class="labStatBox" style="max-width: 70px;">
+                    <center>
+                    <div>
+                        <p class="heading" style="font-size: 16px;margin-bottom: 5px;">Rice</p>
+                        <p class="heading" style="font-size: 16px;color: rgb(255, 208, 0);">Pending</p>
+                    </div>
+                </center>
+                </div>
+                
+                <div class="labStatBox" style="max-width: 70px;">
+                    <center>
+                    <div>
+                        <p class="heading" style="font-size: 16px;margin-bottom: 5px;">Rice</p>
+                        <p class="heading" style="font-size: 16px;color: #FF0000;">Failed</p>
+                    </div>
+                </center>
+                </div>
+            </center>
+
+        </div>
+
+        <div>
+            <p class="heading" style="font-size: 21px;margin-top: 15px;margin-bottom: 10px;">Current Requests</p>
+
+            <center>
+            <div id="curRequests">
+
+                <div class="currReqBox">
+                    <div class="flex-box">
+                        <p class="heading" style="font-size: 16px;flex-grow: 1;margin-top: 10px;">Rice</p>
+                        <div style="flex-grow: 1;">
+                            <p class="heading" style="font-size: 16px;color: #0077FF;display: block;text-align: center;margin-bottom: 5px;">Qty Left</p>
+                            <p class="heading smallText" >Rs 100</p>
+                        </div>
+
+                        <div style="flex-grow: 1;">
+                            <p class="heading" style="font-size: 16px;color: rgb(255, 154, 1);display: block;text-align: center;margin-bottom: 5px;">Highest Bid</p>
+                            <p class="heading smallText">100 Kg</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </center>
+
+        </div>
+
+        <div>
+            <p class="heading" style="font-size: 21px;margin-top: 15px;margin-bottom: 10px;">Accepted Orders</p>
+
+            <center>
+            <div id="accOrder">
+
+                <div class="currReqBox">
+                    <div class="flex-box">
+                        <p class="heading" style="font-size: 16px;flex-grow: 1;margin-top: 10px;">Rice</p>
+                        <div style="flex-grow: 1;">
+                            <p class="heading" style="font-size: 16px;color: #0077FF;display: block;text-align: center;margin-bottom: 5px;">Total Qty</p>
+                            <p class="heading smallText" >Rs 100</p>
+                        </div>
+
+                        <div style="flex-grow: 1;">
+                            <p class="heading" style="font-size: 16px;color: rgb(255, 154, 1);display: block;text-align: center;margin-bottom: 5px;">Total Price</p>
+                            <p class="heading smallText">100 Kg</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </center>
+
+        </div>
+    </body>
+</html>
