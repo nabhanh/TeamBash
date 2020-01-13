@@ -59,7 +59,8 @@
             }
 
             #main{
-                margin: 20px
+                margin: 20px;
+                padding-bottom: 60px;
             }
 
             #footer{
@@ -77,59 +78,15 @@
             <p class="heading" style="font-size: 36px;">Home</p>
         <p class="heading" style="font-size: 21px;margin-top: 15px;margin-bottom: 10px;">Lab Status</p>
         
-        <div id="labStat">
-            <center>
-                <div class="labStatBox" style="max-width: 70px;">
-                    <center>
-                    <div>
-                        <p class="heading" style="font-size: 16px;margin-bottom: 5px;">Rice</p>
-                        <p class="heading" style="font-size: 16px;color: #31C600;">Accepted</p>
-                    </div>
-                </center>
-                </div>
-
-                <div class="labStatBox" style="max-width: 70px;">
-                    <center>
-                    <div>
-                        <p class="heading" style="font-size: 16px;margin-bottom: 5px;">Rice</p>
-                        <p class="heading" style="font-size: 16px;color: rgb(255, 208, 0);">Pending</p>
-                    </div>
-                </center>
-                </div>
-                
-                <div class="labStatBox" style="max-width: 70px;">
-                    <center>
-                    <div>
-                        <p class="heading" style="font-size: 16px;margin-bottom: 5px;">Rice</p>
-                        <p class="heading" style="font-size: 16px;color: #FF0000;">Failed</p>
-                    </div>
-                </center>
-                </div>
-            </center>
-
-        </div>
+        <center>
+            <div id="labStat"></div>
+        </center>        
 
         <div>
             <p class="heading" style="font-size: 21px;margin-top: 15px;margin-bottom: 10px;">Current Requests</p>
 
             <center>
             <div id="curRequests">
-
-                <div class="currReqBox">
-                    <div class="flex-box">
-                        <p class="heading" style="font-size: 16px;flex-grow: 1;margin-top: 10px;">Rice</p>
-                        <div style="flex-grow: 1;">
-                            <p class="heading" style="font-size: 16px;color: #0077FF;display: block;text-align: center;margin-bottom: 5px;">Qty Left</p>
-                            <p class="heading smallText" >Rs 100</p>
-                        </div>
-
-                        <div style="flex-grow: 1;">
-                            <p class="heading" style="font-size: 16px;color: rgb(255, 154, 1);display: block;text-align: center;margin-bottom: 5px;">Highest Bid</p>
-                            <p class="heading smallText">100 Kg</p>
-                        </div>
-                    </div>
-                </div>
-                
             </div>
         </center>
 
@@ -140,22 +97,6 @@
 
             <center>
             <div id="accOrder">
-
-                <div class="currReqBox">
-                    <div class="flex-box">
-                        <p class="heading" style="font-size: 16px;flex-grow: 1;margin-top: 10px;">Rice</p>
-                        <div style="flex-grow: 1;">
-                            <p class="heading" style="font-size: 16px;color: #0077FF;display: block;text-align: center;margin-bottom: 5px;">Total Qty</p>
-                            <p class="heading smallText" >Rs 100</p>
-                        </div>
-
-                        <div style="flex-grow: 1;">
-                            <p class="heading" style="font-size: 16px;color: rgb(255, 154, 1);display: block;text-align: center;margin-bottom: 5px;">Total Price</p>
-                            <p class="heading smallText">100 Kg</p>
-                        </div>
-                    </div>
-                </div>
-                
             </div>
         </center>
 
@@ -165,5 +106,167 @@
         <div id="footer">
 
         </div>
+
+        <script>
+
+            addAcceptedOrder("1", "Test", "100", "10000");
+            addAcceptedOrder("1", "Test", "100", "10000");
+            addAcceptedOrder("1", "Test", "100", "10000");
+
+            addCurrentRequest("1", "Test", "100", "10000");
+            addCurrentRequest("1", "Test", "100", "10000");
+            addCurrentRequest("1", "Test", "100", "10000");
+
+            addLabStatus("1", "Test", "1");
+            addLabStatus("1", "Test", "2");
+            addLabStatus("1", "Test", "3");
+            addLabStatus("1", "Test", "1");
+
+            function addLabStatus(id, name, status){
+                outerDiv = document.createElement("div");
+                outerDiv.className = "labStatBox";
+                outerDiv.style.maxWidth = "70px";
+
+                nameText = document.createElement("p");
+                nameText.className = "heading"
+                nameText.style.fontSize = "16px";
+                nameText.style.color = "white";
+                nameText.style.marginBottom = "5px";
+                nameText.innerHTML = name;
+
+                statusText = document.createElement("p");
+                statusText.className = "heading"
+                statusText.style.fontSize = "16px";
+                statusText.style.color = "white";
+
+                if(status==1){
+                    outerDiv.style.backgroundColor = "#31C600";
+                    statusText.innerHTML = "Accepted";
+                }
+                else if(status==2){
+                    outerDiv.style.backgroundColor = "#FFCD00";
+                    statusText.innerHTML = "Pending";
+                }
+                else{
+                    outerDiv.style.backgroundColor = "#FF0000";
+                    statusText.innerHTML = "Declined";
+                }
+
+                outerDiv.appendChild(nameText);
+                outerDiv.appendChild(statusText);
+
+                document.getElementById("labStat").append(outerDiv);
+            }
+
+            function addAcceptedOrder(id, name, totQty, totPrice){
+                
+                outerDiv = document.createElement("div");
+                outerDiv.className = "currReqBox";
+
+                flexBox = document.createElement("div");
+                flexBox.className = "flex-box";
+
+                nameText = document.createElement("p");
+                nameText.className = "heading";
+                nameText.style.fontSize = "16px";
+                nameText.style.flexGrow = "1";
+                nameText.style.marginTop = "10px";
+                nameText.innerHTML = name;
+
+                qtyDiv = document.createElement("div");
+                qtyDiv.style.flexGrow = "1";
+
+                qtyHeading = getHeading("Total Qty", "#0077FF");
+
+                qtyText = document.createElement("p");
+                qtyText.className = "heading smallText";
+                qtyText.innerHTML = totQty + " Kg";
+
+                qtyDiv.appendChild(qtyHeading);
+                qtyDiv.appendChild(qtyText);
+
+                priceDiv = document.createElement("div");
+                priceDiv.style.flexGrow = "1";
+
+                priceHeading = getHeading("Total Price", "#31C600");
+
+                priceText = document.createElement("p");
+                priceText.className = "heading smallText";
+                priceText.innerHTML = "Rs " + totPrice;
+
+                priceDiv.appendChild(priceHeading);
+                priceDiv.appendChild(priceText);
+
+                flexBox.appendChild(nameText);
+                flexBox.appendChild(qtyDiv);
+                flexBox.appendChild(priceDiv);
+
+                outerDiv.appendChild(flexBox);
+
+                document.getElementById("accOrder").appendChild(outerDiv);
+            }
+
+            function addCurrentRequest(id, name, totQty, totPrice){
+                
+                outerDiv = document.createElement("div");
+                outerDiv.className = "currReqBox";
+
+                flexBox = document.createElement("div");
+                flexBox.className = "flex-box";
+
+                nameText = document.createElement("p");
+                nameText.className = "heading";
+                nameText.style.fontSize = "16px";
+                nameText.style.flexGrow = "1";
+                nameText.style.marginTop = "10px";
+                nameText.innerHTML = name;
+
+                qtyDiv = document.createElement("div");
+                qtyDiv.style.flexGrow = "1";
+
+                qtyHeading = getHeading("Qty Left", "#0077FF");
+
+                qtyText = document.createElement("p");
+                qtyText.className = "heading smallText";
+                qtyText.innerHTML = totQty + " Kg";
+
+                qtyDiv.appendChild(qtyHeading);
+                qtyDiv.appendChild(qtyText);
+
+                priceDiv = document.createElement("div");
+                priceDiv.style.flexGrow = "1";
+
+                priceHeading = getHeading("Highest Bid", "#31C600");
+
+                priceText = document.createElement("p");
+                priceText.className = "heading smallText";
+                priceText.innerHTML = "Rs " + totPrice;
+
+                priceDiv.appendChild(priceHeading);
+                priceDiv.appendChild(priceText);
+
+                flexBox.appendChild(nameText);
+                flexBox.appendChild(qtyDiv);
+                flexBox.appendChild(priceDiv);
+
+                outerDiv.appendChild(flexBox);
+
+                document.getElementById("curRequests").appendChild(outerDiv);
+            }
+
+            function getHeading(str, color){
+                heading = document.createElement("p");
+                heading.className = "heading";
+                heading.style.fontSize = "16px";
+                heading.style.color = color;
+                heading.style.display = "block";
+                heading.style.textAlign = "center";
+                heading.style.marginBottom = "5px";
+                heading.innerHTML = str;
+
+                return heading;
+            }
+
+        </script>
     </body>
 </html>
