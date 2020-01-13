@@ -111,11 +111,7 @@
         <script>
             getAccReqs(1);
             getCurReqs(1);
-
-            addLabStatus("1", "Test", "1");
-            addLabStatus("1", "Test", "2");
-            addLabStatus("1", "Test", "3");
-            addLabStatus("1", "Test", "1");
+            getStatus(1);
 
             function addLabStatus(id, name, status){
                 outerDiv = document.createElement("div");
@@ -307,6 +303,31 @@
                 addAcceptedOrder(counter.id,counter.name,counter.bid_qty,counter.bid_price*counter.bid_qty);
             }
         }
+        function getStatus(id) {
+            jsonData = {
+                fid:id
+            };
+            $.ajax({
+                type: "GET",
+                data: jsonData,
+                url: "../../BackEnd/misc/getStatus.php",
+                success: function(data) {
+                    console.log(data);
+                    printStatus(data);
+                    },
+                error: function(data) {
+                    console.log("ERROR");
+                }
+            });
+        }
+        function printStatus(jsonD) {
+            var jsonData = JSON.parse(jsonD);
+            for (var i = 0; i < jsonData.length; i++) {
+                var counter = jsonData[i];  
+                addLabStatus(counter.id,counter.name,counter.status);
+                 }
+        }
+
 
         </script>
     </body>
