@@ -89,6 +89,10 @@
 <script>
     getProducts();
     getFarmers();
+    addProduct("Rice",100,120);
+    addProduct("Wheat",200,18);
+    addFarmer("Name1");
+    addFarmer("Name2");
     function addProduct(name,qty,price){
         outerDiv=document.createElement("div");
         outerDiv.className="productBox";

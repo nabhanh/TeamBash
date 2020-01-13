@@ -266,6 +266,66 @@
 
                 return heading;
             }
+            function getCurReqs() {
+            // jsonData = {
+            //     productName: nameV,
+            //     qty: qtyV,
+            //     colour: colourV,
+            //     pid: pidV,
+            //     uid: uidV
+            // };
+                jsonData={
+
+                };
+            $.ajax({
+                type: "POST",
+                data: jsonData,
+                url: "../../BackEnd/misc/getCurReqHome.php",
+                success: function(data) {
+                    parseData(data);
+                    },
+                error: function(data) {
+                    console.log("ERROR");
+                }
+            });
+        }
+        function printCur(jsonD) {
+            var jsonData = JSON.parse(jsonD);
+            for (var i = 0; i < jsonData.length; i++) {
+                var counter = jsonData[i];  
+                addCurrentRequest(counter.name,counter.quantity,counter.price);
+            }
+        }
+        function getAccReqs() {
+            // jsonData = {
+            //     productName: nameV,
+            //     qty: qtyV,
+            //     colour: colourV,
+            //     pid: pidV,
+            //     uid: uidV
+            // };
+                jsonData={
+
+                };
+            $.ajax({
+                type: "POST",
+                data: jsonData,
+                url: "../../BackEnd/product/get_data.php",
+                success: function(data) {
+                    parseData(data);
+                    },
+                error: function(data) {
+                    console.log("ERROR");
+                }
+            });
+        }
+        function printAcc(jsonD) {
+            var jsonData = JSON.parse(jsonD);
+            for (var i = 0; i < jsonData.length; i++) {
+                var counter = jsonData[i];  
+                addAcceptedOrder(counter.id,counter.name,counter.qty,counter.price);
+            }
+        }
 
         </script>
     </body>
