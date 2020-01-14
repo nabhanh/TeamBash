@@ -90,12 +90,15 @@
                 alert("Enter All Fields to Continue");
             }
             else{
-                if(highestBid>=price){
+            
+                if(highestBid >= price){
                     alert("Enter a Bid Price Higher than Rs "+highestBid);
                     console.log(highestBid);
                     console.log(price);
-                }else if(qtyLeftGlob<qty){
+                }else if(parseFloat(qtyLeftGlob) < parseFloat(qty)){
                     alert("Enter Bid Quantity Less than "+qtyLeftGlob);
+                    console.log("Qty:"+qtyLeftGlob);
+                    console.log("QtyT:"+qty);
                 }
                 else
                 addBidding(price, qty);

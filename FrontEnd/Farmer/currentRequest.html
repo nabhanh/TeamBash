@@ -101,6 +101,7 @@
                     data: jsonData,
                     url: "../../BackEnd/bidding/getBidFarmerId.php",
                     success: function(data) {
+                        console.log(data);
                         parseData(data);
                     },
                     error: function(data) {
