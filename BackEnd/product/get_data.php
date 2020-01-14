@@ -3,7 +3,7 @@ include '../login.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$query = 'SELECT * FROM product';
+$query = 'SELECT * FROM product WHERE status = 1';
 $results = mysqli_query($db, $query);
 
 $response = [];

@@ -1,0 +1,192 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Current Requests
+        </title>
+
+        <style>
+        body{
+            font-family: HelveticaNeue;
+            margin: 20px;
+            }
+            
+        p{
+            margin: 0;
+            padding: 0;
+        }
+
+        .heading{
+            font-family: HelveticaNeue-Bold;
+            color: #000000;
+            text-align: left;
+        }
+
+        .requestBox{
+                background: #0077FF;
+                box-shadow: 0 2px 4px 0 rgba(159,159,159,0.50);
+                border-radius: 8px;
+                display: inline-block;
+                padding: 15px;
+                width: 70px;
+                margin: 4px;
+            }
+        
+        .reqMainBox{
+            background: #ffffff;
+            border: 1px solid black;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        </style>
+
+    </head>
+
+    <body>
+        <p class="heading" style="font-size: 36px;margin-bottom: 15px;">Current Requests</p>
+
+        <center>
+            <div id="requests">
+
+            </div>
+        </center>
+
+        <script>
+
+            //addMainRequest("1", "Rice", "[{\"bid_price\":\"200\",\"bid_qty\":\"10\"},{\"bid_price\":\"100\",\"bid_qty\":\"20\"}]");
+            getRequests(1);
+
+            function addMainRequest(id, name, subJSON){
+
+                outerDiv = document.createElement("div");
+                outerDiv.id = "req-" + id;
+                outerDiv.className = "reqMainBox";
+
+                headingText = document.createElement("p");
+                headingText.className = "heading";
+                headingText.style.fontSize = "28px";
+                headingText.style.marginBottom = "15px";
+                headingText.style.color = "#30AE1E";
+                headingText.innerHTML = name;
+
+                outerDiv.appendChild(headingText);
+
+                document.getElementById("requests").appendChild(outerDiv);
+
+                parseSubReq(id, subJSON);
+            }
+
+            function parseSubReq(id, subJSON){
+
+                div = document.getElementById("req-" + id);
+
+                var jsonData = JSON.parse(subJSON);
+
+                if(jsonData.length==0){
+                    dispMsg = document.createElement("p");
+                    dispMsg.className = "heading";
+                    dispMsg.style.fontSize = "20px";
+                    dispMsg.style.marginBottom = "10px";
+                    dispMsg.style.color = "#000000";
+                    dispMsg.innerHTML = "No Bids"
+
+                    div.appendChild(dispMsg);
+                }
+                else{
+                    for (var i = 0; i < jsonData.length; i++) {
+                    var counter = jsonData[i];  
+                    addRequests(counter.bid_qty, counter.bid_price, div, counter.id);
+                }
+                }
+
+            }
+
+            //addRequests("100", "10");
+
+            function getRequests(id){
+                jsonData={
+                    fid:id
+                    };
+                $.ajax({
+                    type: "GET",
+                    data: jsonData,
+                    url: "../../BackEnd/bidding/getBidFarmer.php",
+                    success: function(data) {
+                        parseData(data);
+                    },
+                    error: function(data) {
+                        console.log("ERROR");
+                        }
+                    });
+            }
+
+            function parseData(jsonD){
+                var jsonData = JSON.parse(jsonD);
+                for (var i = 0; i < jsonData.length; i++) {
+                    var counter = jsonData[i];  
+                    addMainRequest(counter.id,counter.name,counter.requests);
+                }
+            }
+
+            function addRequests(qty, price, div, id){
+                
+                var outerDiv = document.createElement("div");
+                outerDiv.className = "requestBox";
+
+                outerDiv.onclick = function(){
+                    if (confirm('Are you sure you want to accept this order ?')) {
+                        console.log(id);
+                        updateStatus(id, outerDiv);
+                    } else {
+                        console.log("Canceled");
+                    }
+                }
+
+                function updateStatus(id, outerDiv){
+                jsonData={
+                    id: id,
+                    status: 1
+                };
+                $.ajax({
+                    type: "GET",
+                    data: jsonData,
+                    url: "../../BackEnd/misc/updateBidFarmer.php",
+                    success: function(data) {
+                        console.log(data);
+                        outerDiv.parentElement.removeChild(outerDiv);
+                        alert("Successfully Accepted!");
+                    },
+                    error: function(data) {
+                        console.log("ERROR");
+                        }
+                    });
+            }
+
+                qtyText = document.createElement("p");
+                qtyText.className = "heading";
+                qtyText.style.fontSize = "20px";
+                qtyText.style.marginBottom = "5px";
+                qtyText.style.color = "white";
+                qtyText.innerHTML = qty + " Kg";
+                
+                priceText = document.createElement("p");
+                priceText.className = "heading";
+                priceText.style.fontSize = "16px";
+                priceText.style.marginBottom = "5px";
+                priceText.style.color = "white";
+                priceText.innerHTML = price + " /Kg";
+
+                outerDiv.appendChild(qtyText);
+                outerDiv.appendChild(priceText);
+
+                div.appendChild(outerDiv);
+            }
+
+        </script>
+
+    </body>
+
+</html>

@@ -85,6 +85,7 @@
 
         <div>
             <p class="heading" style="font-size: 21px;margin-top: 15px;margin-bottom: 10px;">Current Requests</p>
+            <p style="margin-bottom: 10px;cursor: pointer;user-select: none;-webkit-touch-callout: none;-webkit-user-select: none;" onclick="location.href='currentRequests.html'">View All</p>
 
             <center>
             <div id="curRequests">
@@ -140,7 +141,7 @@
                 }
                 else{
                     outerDiv.style.backgroundColor = "#FF0000";
-                    statusText.innerHTML = "Failed";
+                    statusText.innerHTML = "Declined";
                 }
 
                 outerDiv.appendChild(nameText);
@@ -201,6 +202,10 @@
                 
                 outerDiv = document.createElement("div");
                 outerDiv.className = "currReqBox";
+
+                outerDiv.onclick = function(){
+                    location.href = "currentRequest.html?id="+id;
+                }
 
                 flexBox = document.createElement("div");
                 flexBox.className = "flex-box";

@@ -24,12 +24,23 @@
             padding: 10px;
             height: 20px;
             margin-top: 10px;
+            outline: none;
+            font-family: HelveticaNeue-Bold;
+            font-size: 16px;
         }
+
+        .searchbox::placeholder{
+            color: rgba(109, 109, 109, 0.5);
+            font-family: HelveticaNeue-Bold;
+            font-size: 16px;
+        }
+
         .productBox{
             background: #0080FF;
             border-radius: 10px;
             display: inline-block;
             padding: 10px;
+            box-shadow: 0 2px 4px 0 rgba(159,159,159,0.50);
             margin:5px;
             width: 76px;
             font-size: 16px;
@@ -53,6 +64,7 @@
             width: 70px;
             font-size: 16px;
             padding-bottom: 5px;
+            box-shadow: 0 2px 4px 0 rgba(159,159,159,0.50);
         }
         .farmerBox p{
             text-align: center;
@@ -154,13 +166,6 @@
         document.getElementById("farmers").append(outerDiv);
     }
     function getProducts() {
-            // jsonData = {
-            //     productName: nameV,
-            //     qty: qtyV,
-            //     colour: colourV,
-            //     pid: pidV,
-            //     uid: uidV
-            // };
                 jsonData={
 
                 };
@@ -184,13 +189,6 @@
             }
         }
         function getFarmers() {
-            // jsonData = {
-            //     productName: nameV,
-            //     qty: qtyV,
-            //     colour: colourV,
-            //     pid: pidV,
-            //     uid: uidV
-            // };
                 jsonData={
 
                 };
