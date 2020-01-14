@@ -42,15 +42,42 @@
 
     <body>
 
-        <p class="heading" style="font-size: 36px;margin-bottom: 10px;">My Orders</p>
+        <p class="heading" style="font-size: 36px;margin-bottom: 20px;">My Orders</p>
 
+        <center>
         <div id="orderDiv">
 
         </div>
+    </center>
 
         <script>
+        
+        getData(1);
 
-            addOrder("Test", "Nameyui", "798");
+            function getData(id){
+                jsonData={
+                    id: id
+                };
+                $.ajax({
+                    type: "GET",
+                    data: jsonData,
+                    url: "../../BackEnd/bidding/getDataVendor.php",
+                    success: function(data) {
+                        parseData(data);
+                    },
+                    error: function(data) {
+                            console.log("ERROR");
+                    }
+                });
+            }
+
+            function parseData(jsonD) {
+            var jsonData = JSON.parse(jsonD);
+            for (var i = 0; i < jsonData.length; i++) {
+                var counter = jsonData[i];  
+                addOrder(counter.name, counter.fname, counter.bid_price*counter.bid_qty);
+            }
+            }
 
             function addOrder(name, fname, tPrice){
 

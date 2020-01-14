@@ -52,20 +52,20 @@
     <body>
         <p class="heading" style="font-size: 36px;color: rgb(255, 153, 0);" id="name"></p>
         <p class="heading" style="font-size: 16px;font-family: HelveticaNeue;color: #A2A2A2;margin-bottom: 5px;" id="farmerName"></p>
-        <p class="heading" style="font-size: 24px;font-family: HelveticaNeue-Medium;" id="qtyLeft"></p><br><br>
+        <p class="heading" style="font-size: 20px;font-family: HelveticaNeue-Medium;margin-bottom: 10px;" id="qtyLeft"></p>
 
-        <p class="heading" style="font-size: 30px;font-family: HelveticaNeue-Bold;margin-bottom: 10px; color: #6F3FDD;">Starting Price</p>
-        <p class="heading" style="font-size: 24px;font-family: HelveticaNeue-Medium;" id="startPrice"></p><br><br>
+        <div style="height: 1px; background-color: #818181;width: 100%;margin-bottom: 10px;"></div>
 
-        <p class="heading" style="font-size: 30px;color: #31C600;margin-bottom: 10px;">Highest Bid</p>
-        <p class="heading" style="font-size: 24px;font-family: HelveticaNeue-Medium;" id="highBid"></p><br><br>
+        <p class="heading" style="font-size: 36px;font-family: HelveticaNeue-Bold;margin-bottom: 10px; color: #6F3FDD;">Starting Price</p>
+        <p class="heading" style="font-size: 20px;font-family: HelveticaNeue-Medium;color: rgb(133, 133, 133);" id="startPrice"></p><br><br>
 
-        <p class="heading" style="font-size: 30px;color: #0077FF;">Your Bid</p>
-        <p class="heading" style="font-size: 16px;font-family: HelveticaNeue;color: #A2A2A2;margin-bottom: 10px;">Per Kg</p>
+        <p class="heading" style="font-size: 36px;color: #31C600;margin-bottom: 10px;">Highest Bid</p>
+        <p class="heading" style="font-size: 20px;font-family: HelveticaNeue-Medium;color: rgb(133, 133, 133);" id="highBid"></p><br><br>
+
+        <p class="heading" style="font-size: 36px;color: #0077FF;margin-bottom: 5px;">Current Bid</p>
         
-        <p class="heading" style="font-size: 25px;color: #000000;margin-bottom: 5px;">Current Bid</p>
-        <p class="heading" style="font-size: 20px;font-family: HelveticaNeue-Medium;color: rgb(95, 95, 95);" id="curBidPrice"></p>
-        <p class="heading" style="font-size: 20px;font-family: HelveticaNeue-Medium;margin-bottom: 15px;color: rgb(95, 95, 95);" id="curBidQty"></p>
+        <p class="heading" style="font-size: 20px;font-family: HelveticaNeue-Medium;color: rgb(133, 133, 133);" id="curBidPrice"></p>
+        <p class="heading" style="font-size: 20px;font-family: HelveticaNeue-Medium;margin-bottom: 15px;color: rgb(133, 133, 133);" id="curBidQty"></p><br>
 
     
                 <input type="number" class="bidBox" style="margin-bottom: 5px;" placeholder="Enter Your Bid Price" min="0" inputmode="decimal" id="bidPrice"/>
@@ -91,11 +91,11 @@
             }
             else{
                 if(highestBid>=price){
-                    alert("Enter a Higher Bid Price");
+                    alert("Enter a Bid Price Higher than Rs "+highestBid);
+                    console.log(highestBid);
+                    console.log(price);
                 }else if(qtyLeftGlob<qty){
-                    alert("Enter Lesser Quantity");
-                    console.log(qtyLeftGlob);
-                    console.log(qty);
+                    alert("Enter Bid Quantity Less than "+qtyLeftGlob);
                 }
                 else
                 addBidding(price, qty);
@@ -130,7 +130,7 @@
         }
 
         function setCurrentBid(price, qty){
-            document.getElementById("curBidPrice").innerHTML = "Rs " + price + " Per Kg";
+            document.getElementById("curBidPrice").innerHTML = "Rs " + price + " per Kg";
             document.getElementById("curBidQty").innerHTML = qty + " Kg";
         }
 
@@ -161,7 +161,7 @@
             document.getElementById("name").innerHTML = name;
             document.getElementById("farmerName").innerHTML = "From " + farmerName;
             document.getElementById("qtyLeft").innerHTML = qtyLeft +" Kg Left";
-            document.getElementById("startPrice").innerHTML = "Rs " + price + " Per Kg";
+            document.getElementById("startPrice").innerHTML = "Rs " + price + " per Kg";
 
             if(highestBid<price)
             highestBid = price;
@@ -172,7 +172,7 @@
 
         function setHighBid(bid){
             if(bid!=0){
-                document.getElementById("highBid").innerHTML = "Rs " + bid + " Per Kg"; 
+                document.getElementById("highBid").innerHTML = "Rs " + bid + " per Kg"; 
                 if(highestBid < bid)
                 highestBid = bid;  
             }
