@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <title>My Orders</title>
+        <style>
+            body{
+                font-family: HelveticaNeue;
+                margin: 20px;
+            }
+
+            p{
+                margin: 0;
+                padding: 0;
+            }
+
+            .heading{                
+                font-family: HelveticaNeue-Bold;
+                color: #000000;
+                text-align: left;
+            }
+
+            .orderBox{
+                background: #00AA05;
+                box-shadow: 0 2px 4px 0 rgba(159,159,159,0.50);
+                border-radius: 8px;
+                display: inline-block;
+                padding: 15px;
+                width: 300px;
+                display: flex;
+                align-items: stretch;
+                margin-bottom: 10px;
+            }
+
+            .orderBox p{
+                text-align: center;
+                color: white;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <p class="heading" style="font-size: 36px;margin-bottom: 10px;">My Orders</p>
+
+        <div id="orderDiv">
+
+        </div>
+
+        <script>
+
+            addOrder("Test", "Nameyui", "798");
+
+            function addOrder(name, fname, tPrice){
+
+                outerDiv = document.createElement("div");
+                outerDiv.className = "orderBox";
+
+                nameP = document.createElement("p");
+                nameP.className = "heading";
+                nameP.style.marginTop = "10px";
+                nameP.style.flexGrow = "1";
+                nameP.innerHTML = name;
+
+                fName = getHeadTextDiv("Farmer Name", fname);
+                priceT = getHeadTextDiv("Total Price", "Rs " + tPrice);
+
+                outerDiv.appendChild(nameP);
+                outerDiv.appendChild(fName);
+                outerDiv.appendChild(priceT);
+
+                document.getElementById("orderDiv").appendChild(outerDiv);
+            }
+
+            function getHeadTextDiv(heading, content){
+
+                var outerDiv = document.createElement("div");
+                outerDiv.style.flexGrow = "1";
+
+                headT = document.createElement("p");
+                headT.className = "heading";
+                headT.style.marginBottom = "5px"
+                headT.innerHTML = heading;
+
+                contentT = document.createElement("p");
+                contentT.className = "heading";
+                contentT.fontWeight = "normal";
+                contentT.innerHTML = content;
+
+                outerDiv.appendChild(headT);
+                outerDiv.appendChild(contentT);
+
+                return outerDiv;
+
+            }
+
+        </script>
+
+    </body>
+
+</html>

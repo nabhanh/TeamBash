@@ -61,7 +61,6 @@
 
             #main{
                 margin: 20px;
-                padding-bottom: 60px;
             }
 
             #footer{
@@ -71,17 +70,34 @@
                 background-color: #00AA05;
                 height: 60px;
             }
+
+            .buttonCss{
+                width: 100%;
+                color: white;
+                background-color: #0077FF;
+                height: 50px;
+                font-size: 18px;
+                border: none;
+                outline: none;
+                border-radius: 8px;
+                margin-top: 15px;
+                font-weight: bold;
+                cursor: pointer;
+            }
         </style>
     </head>
 
     <body>
         <div id="main">
             <p class="heading" style="font-size: 36px;">Home</p>
+
         <p class="heading" style="font-size: 21px;margin-top: 15px;margin-bottom: 10px;">Lab Status</p>
         
         <center>
             <div id="labStat"></div>
-        </center>        
+        </center>      
+        
+        <button class="buttonCss" onclick="location.href='uploadProduct.html'">Upload Product</button>
 
         <div>
             <p class="heading" style="font-size: 21px;margin-top: 15px;margin-bottom: 10px;">Current Requests</p>
@@ -103,10 +119,6 @@
         </center>
 
         </div>
-        </div>
-
-        <div id="footer">
-
         </div>
 
         <script>
@@ -202,6 +214,7 @@
                 
                 outerDiv = document.createElement("div");
                 outerDiv.className = "currReqBox";
+                outerDiv.style.cursor = "pointer";
 
                 outerDiv.onclick = function(){
                     location.href = "currentRequest.html?id="+id;
